@@ -1,0 +1,54 @@
+/*
+ * helper_functions.c
+ * Authors : Mytch Johnson & Erik Miller
+ * Class: CPE 329-07 w/ Dr. Oliver
+ * Date: 5/3/2016
+ * Revision: 1.0
+ */
+
+#include "helper_functions.h"
+
+// intiializes the GPIO
+void init_GPIO(){
+	DDRD &= ~(1<<HALLE1);	// Hall effects are inputs
+	DDRB |= (1<<LED13);		// LED at pin 13 is output (debug LED)
+	
+	PORTD |= (1<<HALLE1);	// hall effect 1 internal pulled up 	
+}
+
+// initialize timers
+void init_timers(){
+	
+}
+
+// initialize interrupts
+void init_interrupts(){
+	
+}
+
+// initialize I2C communication
+void init_I2C(){
+	
+}
+
+// delay in us via variable up to 65,535us
+void delay_us(uint16_t delay_us){
+	while(delay_us){
+		_delay_us(1);
+		delay_us--;
+	}
+}
+
+// delay in us via variable up to 65,535us
+void delay_ms(uint16_t delay_ms){
+	while(delay_ms){
+		_delay_ms(1);
+		delay_ms--;
+	}
+}
+
+
+// returns logic level of given hall effect sensor  
+uint8_t check_halls(uint8_t sensor){
+	return !(PIND & (1<<sensor));
+}
