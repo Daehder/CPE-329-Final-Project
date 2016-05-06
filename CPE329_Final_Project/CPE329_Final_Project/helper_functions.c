@@ -8,12 +8,17 @@
 
 #include "helper_functions.h"
 
-// intiializes the GPIO
+// initializes the GPIO
 void init_GPIO(){
-	DDRD &= ~(1<<HALLE1);	// Hall effects are inputs
+	DDRD &= ~(1<<HALLE0);	// Hall effects are inputs
 	DDRB |= (1<<LED13);		// LED at pin 13 is output (debug LED)
 	
+	PORTD |= (1<<HALLE0);	// hall effect 1 internal pulled up 	
 	PORTD |= (1<<HALLE1);	// hall effect 1 internal pulled up 	
+	PORTD |= (1<<HALLE2);	// hall effect 1 internal pulled up 	
+	PORTD |= (1<<HALLE3);	// hall effect 1 internal pulled up
+	PORTD |= (1<<HALLE4);	// hall effect 1 internal pulled up
+	PORTD |= (1<<HALLE5);	// hall effect 1 internal pulled up
 }
 
 // initialize timers
@@ -47,6 +52,16 @@ void delay_ms(uint16_t delay_ms){
 	}
 }
 
+// returns the circumference of a tire wheel in mm (distance per revolution)
+uint16_t circumference_mm(uint8_t wheel_size_mm){
+	double d = PI*(wheel_size_mm/2);
+	return (uint16_t)d; 
+}
+
+uint16_t speed_mm_s(uint8_t time_ms, uint16_t circum_mm){
+	uint8_t dist_mm = (circum_mm/NUM_HALLS); 
+	uint16_t speed = dist_mm/time_ms;	
+}
 
 // returns logic level of given hall effect sensor  
 uint8_t check_halls(uint8_t sensor){

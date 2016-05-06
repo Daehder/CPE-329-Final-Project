@@ -12,8 +12,16 @@
 // global defines 
 #define F_CPU 16000000	// CPU clock frequency 
 
-#define HALLE1 7		// Hall effect sensor at PD7
+#define HALLE0 7		// Hall effect sensor at PD7
+#define HALLE1 6		// Hall effect sensor at PD6
+#define HALLE2 5		// Hall effect sensor at PD5
+#define HALLE3 4		// Hall effect sensor at PD4
+#define HALLE4 3		// Hall effect sensor at PD3
+#define HALLE5 2		// Hall effect sensor at PD2
 #define LED13 5			// on-board LED at PB5
+
+#define PI 3.141592		// mathematical pi
+#define NUM_HALLS 6		// number of hall effects on wheel
 
 // global libraries
 #include <avr/io.h>
@@ -24,6 +32,8 @@ void init_GPIO();
 void init_timers();
 void init_interrupts(); 
 void init_I2C();
+uint8_t circumference_mm(uint8_t wheel_size_mm); 
+uint16_t speed_mm_s(uint8_t time_ms, uint16_t circum);
 void delay_us(uint16_t delay_us);
 void delay_ms(uint16_t delay_ms);
 uint8_t check_halls(uint8_t sensor);
