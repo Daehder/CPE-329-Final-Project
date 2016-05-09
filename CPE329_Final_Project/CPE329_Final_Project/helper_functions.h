@@ -27,12 +27,26 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+// struct for color spectrum red, green, and blue color
+typedef struct color{
+	uint8_t r;
+	uint8_t g;
+	uint8_t b;
+} color;
+	
+// struct for LEDs (color, location, and brightness)
+typedef struct LED{
+	color clr; //
+	uint8_t loc;
+	uint8_t brit;
+} LED;
+
 // global helper functions 
 void init_GPIO();
 void init_timers();
 void init_interrupts(); 
 void init_I2C();
-uint8_t circumference_mm(uint8_t wheel_size_mm); 
+uint16_t circumference_mm(uint8_t wheel_size_mm); 
 uint16_t speed_mm_s(uint8_t time_ms, uint16_t circum);
 void delay_us(uint16_t delay_us);
 void delay_ms(uint16_t delay_ms);

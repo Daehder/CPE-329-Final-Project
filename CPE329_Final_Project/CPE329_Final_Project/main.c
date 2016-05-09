@@ -13,7 +13,7 @@ int main(void)
 	init_GPIO();		// initialize
 	
     // stuck here forever
-    while (1){
+    while (1){		
 		if(check_halls(HALLE1))
 			PORTB |= (1<<LED13);
 		else

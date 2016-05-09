@@ -58,9 +58,12 @@ uint16_t circumference_mm(uint8_t wheel_size_mm){
 	return (uint16_t)d; 
 }
 
+// This must be fixed up
+// returns the speed of the by measuring time between two points
 uint16_t speed_mm_s(uint8_t time_ms, uint16_t circum_mm){
-	uint8_t dist_mm = (circum_mm/NUM_HALLS); 
-	uint16_t speed = dist_mm/time_ms;	
+	//uint8_t dist_mm = (circum_mm/NUM_HALLS); 
+	//uint16_t speed = dist_mm/time_ms;
+	return 0;
 }
 
 // returns logic level of given hall effect sensor  
