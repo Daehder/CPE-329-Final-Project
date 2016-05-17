@@ -23,11 +23,17 @@ void init_GPIO(){
 
 // initialize timers
 void init_timers(){
+	// timer 0 (bit)
 	
+	// timer 1 (16it timer)
+	TCCR1A = 0x00;			// normal mode (overflow at 0xFFFF)
+	TCCR1B = (1<<CS10);		// no clock pre-scaler
+	TIMSK1 = (1<<TOIE1);	// mask to view 
+	TIFR1 = (1<<TOV1);		// enable Interrupts when TCNT overflows
 }
 
-// initialize interrupts
-void init_interrupts(){
+// initialize variables
+void init_variables(){
 	
 }
 
@@ -52,21 +58,26 @@ void delay_ms(uint16_t delay_ms){
 	}
 }
 
+/*
 // returns the circumference of a tire wheel in mm (distance per revolution)
-uint16_t circumference_mm(uint8_t wheel_size_mm){
-	double d = PI*(wheel_size_mm/2);
-	return (uint16_t)d; 
+uint32_t circumference_mm(uint16_t wheel_size_mm){
+	double d = PI*(wheel_size_mm);
+	return (uint32_t)d; 
 }
 
 // This must be fixed up
 // returns the speed of the by measuring time between two points
-uint16_t speed_mm_s(uint8_t time_ms, uint16_t circum_mm){
-	//uint8_t dist_mm = (circum_mm/NUM_HALLS); 
-	//uint16_t speed = dist_mm/time_ms;
-	return 0;
+uint32_t speed_mm_us(uint32_t dist_mm, uint32_t time_us){
+	return (dist_mm / time_us);
 }
+*/
 
 // returns logic level of given hall effect sensor  
 uint8_t check_halls(uint8_t sensor){
 	return !(PIND & (1<<sensor));
+}
+
+// return the time in us remaining in TCNT1
+uint16_t tcnt1_to_us(){
+	return ( (TCNT1 * 1000000) / F_CPU);
 }
