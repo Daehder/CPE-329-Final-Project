@@ -24,14 +24,15 @@
 #define NUM_HALLS 6		// number of hall effects on wheel
 
 // global libraries
-#include <avr/io.h>
-#include <util/delay.h>
+//#include <avr/io.h>
+//#include <util/delay.h>
+#include <stdint.h>
 
 // struct for color spectrum red, green, and blue color
 typedef struct color{
-	uint8_t r;
-	uint8_t g;
-	uint8_t b;
+	uint16_t r;
+	uint16_t g;
+	uint16_t b;
 } color;
 	
 // struct for LEDs (color, location, and brightness)
