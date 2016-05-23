@@ -28,8 +28,9 @@
 
 // real world values
 #define PI 3.141592			// mathematical pi
-#define NUM_HALLS 3		// number of hall effects on wheel
+#define NUM_HALLS 3			// number of hall effects on wheel
 #define WHL_DIAM_UM 660000	// diameter of bike wheel in mm
+#define TLC_NUM 1			// number of TLC5946 chips
 
 // global libraries
 //#include <avr/io.h>

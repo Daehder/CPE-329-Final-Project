@@ -5,7 +5,7 @@
  * Date: 5/16/2016
  * Revision: 1.0
  */
-
+#include "helper_functions.h"
 #include "RGBDriver.h"
 
 #define NUM_BYTES 24  /* The number of bytes sent to the TI LED controller */
@@ -24,8 +24,8 @@
 #define BYTE 8    /* Bits */
 
 
-#define MOSI 2  // PB pin 3
-#define SCK  1  // PB pin 5
+#define MOSI 4  // PB pin 3
+#define SCK  5  // PB pin 5
 #define SS   0  // PB pin 2
 
 #define LED_CONFIG	(DDRD |= (1<<PD6))
@@ -56,7 +56,7 @@ void sendByte(unsigned char);
 
 unsigned char shiftReg[NUM_BYTES];
 
-
+/*
  int TWBR;      // Debugging stuff for use in xcode, do not add when adding to arduino
  int TWSR;
  int TWCR;
@@ -64,7 +64,7 @@ int TWINT;
  int TWSTA;
  int TWEN;
  int TWDR;
-
+*/
 
 void gsConvert(int data, int led) {
    int ndx = (led * 12) / 8;
@@ -106,7 +106,7 @@ void initRGB() {
    //    (0<<SPI2X) ;        //Doubles SPI clock
    
    
-   PORTB |= 1 << SS;       // make sure SS is high
+   //PORTB |= 1 << SS;       // make sure SS is high
    
    /* Enable SPI, Master, set clock rate fck/16 */
    SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);
@@ -232,7 +232,7 @@ int sendLED(color clr, int led) {
 void updateLEDs() {
    int ndx;
    
-   for (ndx = 0; ndx < NUM_BYTES; ndx++)
+   for (ndx = NUM_BYTES-1; ndx >= 0; ndx--)
       sendByte(shiftReg[ndx]);
 }
 
@@ -244,7 +244,7 @@ void sendByte(unsigned char data) {
 //   while( !(TWCR & (1<<TWINT)) ){
 //      
 //   }
-   PORTB &= ~(1 << SS);        // assert the slave select
+   //PORTB &= ~(1 << SS);        // assert the slave select
    
    /* Start transmission */
    SPDR = Data;
@@ -254,5 +254,7 @@ void sendByte(unsigned char data) {
 //      _delay_us(10000);
    }
    
-   PORTB |= 1 << SS;        // deassert the slave select
+   //PORTB |= 1 << SS;        // deassert the slave select
+   PORTB |= (1<<XLAT);
+   PORTB &= ~(1<<XLAT);
 }
