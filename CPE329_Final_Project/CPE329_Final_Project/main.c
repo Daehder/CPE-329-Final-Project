@@ -17,12 +17,11 @@ int main(void)
 {
 	init_GPIO();
 	init_timers();
-	init_I2C();
 	sei();
 	//hall_dl = (circumference_mm(WHL_DIAM_UM) / NUM_HALLS);
 	
     // stuck here forever
-    while (1){		
+    while(1){		
 	
     }
 }

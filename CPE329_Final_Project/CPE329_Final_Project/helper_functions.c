@@ -16,9 +16,6 @@ void init_GPIO(){
 	PORTD |= (1<<HALLE0);	// hall effect 1 internal pulled up 	
 	PORTD |= (1<<HALLE1);	// hall effect 1 internal pulled up 	
 	PORTD |= (1<<HALLE2);	// hall effect 1 internal pulled up 	
-	PORTD |= (1<<HALLE3);	// hall effect 1 internal pulled up
-	PORTD |= (1<<HALLE4);	// hall effect 1 internal pulled up
-	PORTD |= (1<<HALLE5);	// hall effect 1 internal pulled up
 }
 
 // initialize timers
@@ -34,11 +31,6 @@ void init_timers(){
 
 // initialize variables
 void init_variables(){
-	
-}
-
-// initialize I2C communication
-void init_I2C(){
 	
 }
 

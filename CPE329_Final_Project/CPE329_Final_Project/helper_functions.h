@@ -10,18 +10,25 @@
 #define HELPER_FUNCTIONS_H_
 
 // global defines 
-#define F_CPU 16000000	// CPU clock frequency 
 
+// micro controller I/O 
+#define F_CPU 16000000	// CPU clock frequency 
 #define HALLE0 7		// Hall effect sensor at PD7
 #define HALLE1 6		// Hall effect sensor at PD6
 #define HALLE2 5		// Hall effect sensor at PD5
-#define HALLE3 4		// Hall effect sensor at PD4
-#define HALLE4 3		// Hall effect sensor at PD3
-#define HALLE5 2		// Hall effect sensor at PD2
 #define LED13 5			// on-board LED at PB5
 
+// TLC5946 input pins (needs to be edited)
+#define MODE 1
+#define XLAT 1
+#define MOSI 1
+#define BLANK 1
+#define SCLK 1
+#define GSCLK 1
+
+// real world values
 #define PI 3.141592			// mathematical pi
-#define NUM_HALLS 6			// number of hall effects on wheel
+#define NUM_HALLS 3		// number of hall effects on wheel
 #define WHL_DIAM_UM 660000	// diameter of bike wheel in mm
 
 // global libraries
@@ -47,7 +54,6 @@ typedef struct LED{
 void init_GPIO();
 void init_timers();
 void init_variables(); 
-void init_I2C();
 uint32_t circumference_mm(uint16_t wheel_size_mm); 
 uint32_t speed_mm_us(uint32_t dist_mm, uint32_t time_us);
 void delay_us(uint16_t delay_us);
