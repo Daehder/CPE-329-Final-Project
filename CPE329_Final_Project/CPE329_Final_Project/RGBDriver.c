@@ -91,11 +91,13 @@ int sendLED(color clr, int led) {
 void updateLEDs() {
    int ndx;
    
+   PORTB |= (1 << BLANK);
+   
    for (ndx = NUM_BYTES-1; ndx >= 0; ndx--)
       sendByte(shiftReg[ndx]);
 	  
-	PORTB |= (1<<XLAT);
-	PORTB &= ~(1<<XLAT);
+   PORTB &= ~(1 << BLANK);
+   PORTB_pulse(XLAT);
 }
 
 void sendByte(unsigned char data) {  
