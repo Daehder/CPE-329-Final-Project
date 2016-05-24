@@ -9,6 +9,7 @@
 #include "RGBDriver.h"
 
 #define NUM_BYTES 24  /* The number of bytes sent to the TI LED controller */
+//#define TLC_NUM 1
 
 #define NIBBLE_MASK 0xF /* A mask that only exposes a nibble */
 #define BYTE_MASK 0xFF  /* A mask that only exposes the bottom byte */
@@ -27,11 +28,8 @@
 #define LED_TOGGLE (PORTD ^= (1<<PD6))
 
 /* Set MOSI and SCK output, all others input */
-#define initIO 1
+//#define initIO 1
 
-#define BCR 0x3F
-#define BCG 0x3F
-#define BCB 0x3F
 
 void updateLEDs();
 void sendByte(unsigned char);
@@ -43,18 +41,18 @@ void gsConvert(int data, int led) {
    int offset = (led * 12) % 8;
    int mask = BYTE_MASK >> offset;
    
-   shiftReg[ndx] = ((data & mask) << offset);
+   shiftReg[ndx] &= ~(mask << offset);
+   shiftReg[ndx] |= ((data & mask) << offset);
    
-   if(mask == NIBBLE_MASK) {
+   if(mask == NIBBLE_MASK)
       mask = BYTE_MASK;
-      offset = 0;
-   }
-   else {
+   else
       mask = NIBBLE_MASK;
-      offset = 4;
-   }
    
-   shiftReg[++ndx] = ((data & mask) << offset);
+   offset = 8 - offset;
+   
+   shiftReg[++ndx] &= ~(mask);
+   shiftReg[ndx] |= ((data >> offset & mask));
 }
 
 /* Sets up the TWI registers to prepare for transmission */
