@@ -38,7 +38,9 @@ SUBDIRS :=
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../helper_functions.c \
-../main.c
+../main.c \
+../rgb.c \
+../RGBDriver.c
 
 
 PREPROCESSING_SRCS += 
@@ -49,19 +51,27 @@ ASM_SRCS +=
 
 OBJS +=  \
 helper_functions.o \
-main.o
+main.o \
+rgb.o \
+RGBDriver.o
 
 OBJS_AS_ARGS +=  \
 helper_functions.o \
-main.o
+main.o \
+rgb.o \
+RGBDriver.o
 
 C_DEPS +=  \
 helper_functions.d \
-main.d
+main.d \
+rgb.d \
+RGBDriver.d
 
 C_DEPS_AS_ARGS +=  \
 helper_functions.d \
-main.d
+main.d \
+rgb.d \
+RGBDriver.d
 
 OUTPUT_FILE_PATH +=CPE329_Final_Project.elf
 
@@ -77,6 +87,10 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
 
 
 

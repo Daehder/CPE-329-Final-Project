@@ -5,20 +5,21 @@
  * Date: 5/16/2016
  * Revision: 1.0
  */
-#include "helper_functions.h"
+//#include "helper_functions.h"
 #include "RGBDriver.h"
 
 #define NUM_BYTES 24  /* The number of bytes sent to the TI LED controller */
 
-#define NIBBLE_MASK = 0xF /* A mask that only exposes a nibble */
+#define NIBBLE_MASK 0xF /* A mask that only exposes a nibble */
 #define BYTE_MASK 0xFF  /* A mask that only exposes the bottom byte */
 #define TWELVE_BIT_MASK 0xFFF /* A mask that exposes the grayscale value */
 #define BYTE 8    /* Bits */
 
-
+/*
 #define MOSI 4  // PB pin 3
 #define SCK  5  // PB pin 5
 #define SS   0  // PB pin 2
+*/
 
 #define LED_CONFIG	(DDRD |= (1<<PD6))
 #define LED_ON (PORTD |= (1<<PD6))
@@ -26,7 +27,7 @@
 #define LED_TOGGLE (PORTD ^= (1<<PD6))
 
 /* Set MOSI and SCK output, all others input */
-#define initIO (DDRB |= (1<<MOSI)|(1<<SCK)|(1<<SS))
+#define initIO 1
 
 #define BCR 0x3F
 #define BCG 0x3F
@@ -58,7 +59,7 @@ void gsConvert(int data, int led) {
 
 /* Sets up the TWI registers to prepare for transmission */
 void initRGB() {
-   initIO;
+   DDRB |= (1<<MOSI)|(1<<SCLK);
    SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);
    
    for(int i=0; i<(TLC_NUM*24); i++){
