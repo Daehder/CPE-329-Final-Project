@@ -22,15 +22,6 @@
 void initRGB();
 int sendLED(color clr, int led);
 
-
-//extern int TWBR;      // Debugging stuff for use in xcode, do not add when adding to arduino
-//extern int TWSR;
-//extern int TWCR;
-//extern int TWINT;
-//extern int TWSTA;
-//extern int TWEN;
-//extern int TWDR;
-
 //#define TW_START = 0xDE      // Debugging stuff for use in xcode, do not add when adding to arduino
 
 
