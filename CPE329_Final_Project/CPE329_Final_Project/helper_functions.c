@@ -22,17 +22,21 @@ void init_GPIO(){
 // initialize timers
 void init_timers(){
 	// timer 0 (8bit)
-	TCCR0A = 0b10100011; 	//timer set to fast pwm
-	TCCR0B = 1; 			//timer clk = system clk / 1;
-							//outputs 16E6/1/255 = 62.5kHz 
-	OCR0A = 128; 			//compare value => 50% duty cycle to PD6
-
-	
+		
 	// timer 1 (16it timer)
 	TCCR1A = 0x00;			// normal mode (overflow at 0xFFFF)
 	TCCR1B = (1<<CS10);		// no clock pre-scaler
 	TIMSK1 = (1<<TOIE1);	// mask to view 
 	TIFR1 = (1<<TOV1);		// enable Interrupts when TCNT overflows
+	
+	// timer 2 (8 bit)
+	TCCR2A = _BV(COM2B1)	// set on BOTTOM, clear on OCR2A (non-inverting) output on OC2B
+			| _BV(WGM21)	// Fast pwm with OCR2A top
+			| _BV(WGM20);	// Fast pwm with OCR2A top
+	TCCR2B = _BV(WGM22);	// Fast pwm with OCR2A top
+	OCR2B = 0;				// duty factor (as short a pulse as possible)
+	OCR2A = 3;				// see tlc_config.h
+	TCCR2B |= _BV(CS20);	// no prescale, (start pwm output)
 }
 
 // initialize variables
