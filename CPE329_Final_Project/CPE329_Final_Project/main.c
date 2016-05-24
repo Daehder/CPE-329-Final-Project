@@ -7,6 +7,7 @@
  */ 
 
 #include "helper_functions.h"
+#include "RGBDriver.h"
 
 // Global Variables
 volatile uint16_t hall_dl = 0;		// distance between halls
@@ -17,8 +18,13 @@ int main(void)
 {
 	init_GPIO();
 	init_timers();
-	sei();
+	initRGB();
+	setAllDC(63);
+	color red ={4095, 0, 0};
+	//sei();
 	//hall_dl = (circumference_mm(WHL_DIAM_UM) / NUM_HALLS);
+	
+	sendLED(red, 0);
 	
     // stuck here forever
     while(1){		
@@ -28,6 +34,7 @@ int main(void)
 
 //////////////////////////////////ISR//////////////////////////////////////////
 
+/*
 // PCINT1_vect and PCINT2_vect use the same ISR, PCINT0_vect
 ISR_ALIAS(PCINT1_vect, PCINT0_vect);
 ISR_ALIAS(PCINT2_vect, PCINT0_vect);
@@ -57,3 +64,4 @@ ISR(PCINT0_vect){
 	hall_dt_last = hall_dt;		// update last hall reading time
 	hall_dt = 0;				// reset hall effect reading time interval 
 }
+*/

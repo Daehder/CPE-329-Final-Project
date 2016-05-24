@@ -3,7 +3,7 @@
 R(IREF) ~ 2k55 ohms
 
 */
-
+#include "helper_functions.h"
 
 // pulses a pin up and back down
 void PORTB_pulse(uint8_t pin){
@@ -31,7 +31,7 @@ void setAllDC(uint8_t value){
     uint8_t thirdByte = value << 6 | value;
 
 	// send 8bit bytes through SPI SPDR
-    for (uint8_t i = 0; i < (NUM_TLCS*12 - 1); i += 3) {
+    for (uint8_t i = 0; i < (TLC_NUM*12 - 1); i += 3) {
         trans_SPI(firstByte);
         trans_SPI(secondByte);
         trans_SPI(thirdByte);
@@ -57,7 +57,7 @@ void setAllGS(uint16_t value){
 	
 	// send each byte into the SPDR
 	// needs XLAT between every 12 bits
-	for(uint8_t i = 0; i<(NUM_TLCS*24 - 1), i++){
+	for(uint8_t i = 0; i<(TLC_NUM*24 - 1); i++){
 		SPI_byte(firstByte);	
 		SPI_byte(secondByte);
 	}

@@ -11,7 +11,8 @@
 // initializes the GPIO
 void init_GPIO(){
 	DDRD &= ~(1<<HALLE0);	// Hall effects are inputs
-	DDRB |= (1<<LED13);		// LED at pin 13 is output (debug LED)
+	//DDRB |= (1<<LED13);		// LED at pin 13 is output (debug LED)
+	DDRD |= (1<<GSCLK);
 	
 	PORTD |= (1<<HALLE0);	// hall effect 1 internal pulled up 	
 	PORTD |= (1<<HALLE1);	// hall effect 1 internal pulled up 	
@@ -20,7 +21,12 @@ void init_GPIO(){
 
 // initialize timers
 void init_timers(){
-	// timer 0 (bit)
+	// timer 0 (8bit)
+	TCCR0A = 0b10100011; 	//timer set to fast pwm
+	TCCR0B = 1; 			//timer clk = system clk / 1;
+							//outputs 16E6/1/255 = 62.5kHz 
+	OCR0A = 128; 			//compare value => 50% duty cycle to PD6
+
 	
 	// timer 1 (16it timer)
 	TCCR1A = 0x00;			// normal mode (overflow at 0xFFFF)
