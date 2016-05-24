@@ -20,15 +20,20 @@ int main(void)
 	init_timers();
 	initRGB();
 	setAllDC(63);
-	color red ={4095, 0, 0};
+	color red ={0xFFF, 0xFFF, 0xFFF};
 	//sei();
 	//hall_dl = (circumference_mm(WHL_DIAM_UM) / NUM_HALLS);
 	
-	sendLED(red, 0);
+	PORTD |= (1<<BLANK);
+	
+	//sendLED(red, 0);
+	//sendLED(red, 1);
+	//sendLED(red, 3);
+	//sendLED(red, 4);
+	setAllGS(0xFFF);
 	
     // stuck here forever
-    while(1){		
-	
+    while(1){
     }
 }
 

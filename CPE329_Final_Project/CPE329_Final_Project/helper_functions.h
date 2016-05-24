@@ -20,11 +20,11 @@
 
 // TLC5946 input pins (needs to be edited)
 #define MODE 2
-#define XLAT 3
+#define XLAT 6
 #define MOSI 3		// SIN
 #define BLANK 4
 #define SCLK 5
-#define GSCLK 6
+#define GSCLK 3
 
 // real world values
 #define PI 3.141592			// mathematical pi
@@ -61,6 +61,10 @@ void delay_us(uint16_t delay_us);
 void delay_ms(uint16_t delay_ms);
 uint8_t check_halls(uint8_t sensor);
 uint16_t tcnt1_to_us();
+
 void setAllDC(uint8_t value);
+void PORTB_pulse(uint8_t pin);
+void trans_SPI(uint8_t SPI_byte);
+void setAllGS(uint16_t value);
 
 #endif /* HELPER_FUNCTIONS_H_ */

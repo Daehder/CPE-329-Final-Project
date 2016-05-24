@@ -90,12 +90,15 @@ int sendLED(color clr, int led) {
 void updateLEDs() {
    int ndx;
    
-   PORTB |= (1 << BLANK);
+   //PORTB |= (1 << BLANK);
    
-   for (ndx = NUM_BYTES-1; ndx >= 0; ndx--)
+   for (ndx = 0; ndx < NUM_BYTES; ndx++)
       sendByte(shiftReg[ndx]);
 	  
-   PORTB &= ~(1 << BLANK);
+   //PORTB &= ~(1 << BLANK);
+   //PORTB |= (1 << XLAT);
+   //delay_us(100);
+   //PORTB &= ~(1 << XLAT);
    PORTB_pulse(XLAT);
 }
 

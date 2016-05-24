@@ -34,7 +34,7 @@ void init_timers(){
 			| _BV(WGM21)	// Fast pwm with OCR2A top
 			| _BV(WGM20);	// Fast pwm with OCR2A top
 	TCCR2B = _BV(WGM22);	// Fast pwm with OCR2A top
-	OCR2B = 0;				// duty factor (as short a pulse as possible)
+	OCR2B = 0;			// duty factor (as short a pulse as possible)
 	OCR2A = 3;				// see tlc_config.h
 	TCCR2B |= _BV(CS20);	// no prescale, (start pwm output)
 }

@@ -58,8 +58,8 @@ void setAllGS(uint16_t value){
 	// send each byte into the SPDR
 	// needs XLAT between every 12 bits
 	for(uint8_t i = 0; i<(TLC_NUM*24 - 1); i++){
-		SPI_byte(firstByte);	
-		SPI_byte(secondByte);
+		trans_SPI(firstByte);	
+		trans_SPI(secondByte);
 	}
 	
 	PORTB_pulse(XLAT);			// pulse XLAT pin
